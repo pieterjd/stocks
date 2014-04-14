@@ -1,0 +1,8 @@
+name = My Entity Example
+description = Entity example to learn about entities. Here we're working with stock prices
+package = Development
+core = 7.x
+
+files[] = stocks.module
+
+dependencies[] = field

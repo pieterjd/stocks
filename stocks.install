@@ -1,0 +1,61 @@
+<?php
+/**
+ * @file
+ * Install for a basic entity - need to create the base table for our entity.
+ * This table can have as many columns as you need to keep track of
+ * entity-specific data that will not be added via attached fields.
+ * The minimum information for the entity to work is an id and an entity name.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function stocks_schema() {
+	$db['stocks'] = array(
+		'description' => t('The base table for stock entity.'),
+		'fields' => array(
+		'id' => array(
+		  'description' => t('Primary key of the stock entity.'),
+		  'type' => 'serial',
+		  'unsigned' => TRUE,
+		  'not null' => TRUE,
+		),
+		// If we allow multiple bundles, then the schema must handle that;
+		// We'll put it in the 'bundle_type' field to avoid confusion with the
+		// entity type.
+		'bundle_type' => array(
+		  'description' => t('The bundle type'),
+		  'type' => 'text',
+		  'size' => 'medium',
+		  'not null' => TRUE
+		),
+		// Additional properties are just things that are common to all
+		// entities and don't require field storage.
+		'name' => array(
+		  'description' => t('Name of the stock'),
+		  'type' => 'varchar',
+		  'length' => 255,
+		  'not null' => TRUE,
+		  'default' => '',
+		),
+		'value' => array(
+		  'description' => t('Value of the stock'),
+		  'type' => 'float',
+		  'size' => 'normal',
+		  'not null' => TRUE,
+		  'default' => 0,
+		),
+		'created' => array(
+		  'description' => t('The Unix timestamp of the entity creation time.'),
+		  'type' => 'int',
+		  'not null' => TRUE,
+		  'default' => 0,
+		),
+		),
+		'primary key' => array('id'),
+	
+	);
+	return $db;
+
+
+}
